@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1_类的基本知识</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 创建一个Person类
+    class Person {
+      constructor(name, age) {
+        // 构造器中的this指向的是实例对象
+        this.name = name;
+        this.age = age;
+      }
+      // 一般方法
+      speak() {
+        // speak方法放在了类的原型对象上，供类的实例进行调用
+        // 通过Person实例调用speak时，speak中的this就是该Person实例
+        console.log(`我是${this.name},我${this.age}岁了`)
+      }
+    }
+
+    // 创建一个Student类，继承于Person类
+    class Student extends Person{
+      constructor(name, age, grade) {
+        super(name, age);       // 必须先调用父类构造方法
+        this.grade = grade;
+      }
+      // 重写从父类继承的方法
+      speak() {
+        // super.speak();
+        console.log(`我是${this.name},我${this.age}岁了,今年在读${this.grade}年级`)
+      }
+
+      study() {
+        // study方法放在类的原型对象上，供实例使用
+        // 通过Student实例调用study时，study中的this就是该Student的实例
+        console.log('正在努力学习中。。。')
+      }
+    }
+
+    const p1 = new Person('Tom', 12)   // 创建实例
+    console.log(p1)           // 输出实例对象
+    p1.speak()                // 调用实例对象的一般方法
+
+    const s1 = new Student('Shiely', 13, '初二')
+    console.log(s1)
+    s1.speak()
+    s1.study()
+    /*
+    * 总结：
+    * 1. 类中的构造器不是必须的，需要对实例进行一些初始化的操作(如添加指定的属性)时才需要
+    * 2. 如果A类继承了B类，且A类中写了构造器，那么A类构造器中的super必须调用
+    * 3. 类中所定义的方法，都是放在了类的原型对象上，供实例去使用
+    * */
+  </script>
+</body>
+</html>
